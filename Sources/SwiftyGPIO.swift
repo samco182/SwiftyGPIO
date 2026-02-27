@@ -170,8 +170,7 @@ fileprivate extension GPIO {
     }
 
     func writeToFile(_ path: String, value: String) {
-        let fp = fopen(path, "w")
-        guard fp != nil else { return }
+        guard let fp = fopen(path, "w") else { return }
         defer { fclose(fp) }
         var value = value
         let res = value.withUTF8 { buffer in
@@ -188,8 +187,7 @@ fileprivate extension GPIO {
     func readFromFile(_ path: String) -> String? {
         let MAXLEN = 8
 
-        let fp = fopen(path, "r")
-        guard fp != nil else { return nil }
+        guard let fp = fopen(path, "r") else { return nil }
         defer { fclose(fp) }
         var buf = (CChar(0), CChar(0), CChar(0), CChar(0),
                    CChar(0), CChar(0), CChar(0), CChar(0))
